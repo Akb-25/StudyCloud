@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  auth-service:
+    image: akb25/auth-service:latest
+    container_name: auth-service
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./auth-service/.env
+
+  course-service:
+    image: akb25/course-service:latest
+    container_name: course-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./course-service/.env
+  
+  progress-service:
+    image: akb25/progress-service:latest
+    container_name: progress-service
+    ports:
+      - "4002:4002"
+    env_file:
+      - ./progress-service/.env
+
+  analytics-service:
+    image: akb25/analytics-service:latest
+    container_name: analytics-service
+    ports:
+      - "4003:4003"
+    env_file:
+      - ./analytics-service/.env
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - auth-service
+      - course-service
+      - progress-service
+      - analytics-service

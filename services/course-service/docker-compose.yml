@@ -1,0 +1,14 @@
+version: '3.8'
+
+services: 
+  course-service:
+    build: .
+    container_name: course-service
+    restart: unless-stopped
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules

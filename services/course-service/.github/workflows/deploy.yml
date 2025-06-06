@@ -1,0 +1,31 @@
+name: Deploy course service
+
+on:
+  push:
+    main:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+
+    - name: Install deps
+      run: npm install
+      working-directory: ./course-service
+
+    # - name: Run tests
+    #   run: npm test
+    #   working-directory: ./course-service
+    
+    - name: Docker Build & Push
+      run: |
+        docker build -t yourname/course-service:latest .
+        docker push yourname/course-service:latest
+      working-directory: ./course-service
