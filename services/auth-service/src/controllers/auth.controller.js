@@ -5,6 +5,14 @@ import { generateToken } from '../services/utils.js';
 import { supabase } from '../services/supabase.js';
 dotenv.config();
 
+export const checkAuth = async (req, res) => {
+    try{
+        res.status(200).json(req.user);    
+    } catch (error) {
+        console.error("Error in checking auth: ", error.message);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
 export const signup = async (req, res) => {
     let { fullName, email, password } = req.body;
     if (!email || !password) {

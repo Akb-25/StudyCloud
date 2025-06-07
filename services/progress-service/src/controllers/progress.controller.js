@@ -6,10 +6,10 @@ dotenv.config();
 
 export const updateProgress = async (req, res) => {
     const {moduleId, courseId} = req.body;
-    // const userId = req.user.id; 
+    const userId = req.user.id; 
     console.log("Module ID: ", moduleId);
     console.log("Course ID: ", courseId);
-    const userId = "51e2f539-6f64-482a-a02a-d68b6fe4d69b";
+    // const userId = "51e2f539-6f64-482a-a02a-d68b6fe4d69b";
 
     try {
         const { data: existing, error: fetchError } = await supabase
@@ -61,13 +61,12 @@ export const updateProgress = async (req, res) => {
 };
 export const getProgressByUserId = async (req, res) => {
     const { courseId } = req.params;
-    // const userId = req.user.id;
-    const userId = "51e2f539-6f64-482a-a02a-d68b6fe4d69b";
+    const userId = req.user.id;
+    // const userId = "51e2f539-6f64-482a-a02a-d68b6fe4d69b";
     console.log("User ID: ", userId);
     console.log("Course ID: ", courseId);
 
     try {
-        // Get progress data
         const { data: progress, error: progressError } = await supabase
             .from('progress')
             .select('completed_modules')
