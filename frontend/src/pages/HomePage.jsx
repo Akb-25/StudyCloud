@@ -2,15 +2,14 @@ import ImageCard from "../components/ImageCard"
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar"
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
+import { axiosInstance } from "../lib/axios";
 const HomePage = () => {
   const navigate = useNavigate();
   const [serviceCards, setServiceCards] = useState([]);
   useEffect(() => {
     const fetchServiceCards = async () => {
       try {      
-        const response = await axios.get('http://localhost:4001/course/'); 
+        const response = await axiosInstance.get('/course/'); 
         setServiceCards(response.data);
       } catch (error) {
         console.error('Error fetching service cards:', error);

@@ -1,16 +1,44 @@
 import Module from "./Module";
 import { useState } from "react";
-
+import { useEffect } from "react";
+import { axiosInstance } from "../lib/axios";
 const CourseDetail = ({ course }) => {
   const [completedModules, setCompletedModules] = useState([]);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const fetchProgress = async () => {
+      try {
+        const result = await axiosInstance.get(`/progress/${course.id}`);
+        console.log("Progress data: ", result.data);
+        if (result.data && result.data.completed_modules) {
+          setCompletedModules(result.data.completed_modules);
+        }
+        setProgress(result.data.ratio);
+      } catch (error) {
+        console.error("Error fetching progress: ", error);
+      }
+    }
+    fetchProgress();
+  }, [course.id]);
+
   console.log("Contents of the course are: ", course);
-  const handleComplete = (moduleId) => {
+  const handleComplete = async (moduleId) => {
     if (!completedModules.includes(moduleId)) {
-      setCompletedModules([...completedModules, moduleId]);
+      try{
+        const result = await axiosInstance
+        .post(`/progress`, {
+          course_id: course.id,
+          module_id: moduleId,
+        });
+        setCompletedModules([...completedModules, moduleId]);
+      } catch (error) {
+        console.error("Error updating progress: ", error);
+      }
     }
   };
 
-  const progress = Math.round((completedModules.length / course.modules.length) * 100);
+  // const progress = Math.round((completedModules.length / course.modules.length) * 100);
 
   return (
     <div className="p-6 max-w-4xl mx-auto">

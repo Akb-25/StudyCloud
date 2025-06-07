@@ -10,7 +10,7 @@ const useAuthStore = create((set, get) => ({
 
     checkingAuth: async () => {
         try{
-            const res =  await axiosInstance.get("http://localhost:4000/auth/checking-auth");
+            const res =  await axiosInstance.get("/auth/checking-auth");
             set({ authUser: res.data});
         } catch{
             set({ authUser: null });

@@ -93,7 +93,7 @@ export const getProgressByUserId = async (req, res) => {
 
         const totalCount = modules.length;
 
-        const ratio = totalCount === 0 ? 0 : completedCount / totalCount;
+        const ratio = totalCount === 0 ? 0 :  Math.round((completedCount / totalCount)* 100);
 
         return res.status(200).json({
             completed: completedCount,

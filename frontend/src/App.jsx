@@ -36,9 +36,9 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/" element={authUser ? <HomePage/> : <Navigate to="/login" />} />
-        <Route path="/home" element={<HomePage/>} />
+        <Route path="/home" element={authUser ? <HomePage/> : <Navigate to="/login" />} />
         <Route path="/settings" element={<Settings/>} />
-        <Route path="/course/:id" element={<ContentPage/>} />
+        <Route path="/course/:id" element={authUser ? <ContentPage/> : <Navigate to="/login" />} />
       </Routes>
     </div>
   )

@@ -7,7 +7,10 @@ services:
     ports:
       - "4000:4000"
     env_file:
-      - ./auth-service/.env
+      - ./services/auth-service/.env
+    networks:
+      - app-net
+
 
   course-service:
     image: akb25/course-service:latest
@@ -15,7 +18,10 @@ services:
     ports:
       - "4001:4001"
     env_file:
-      - ./course-service/.env
+      - ./services/course-service/.env
+    networks:
+      - app-net
+
   
   progress-service:
     image: akb25/progress-service:latest
@@ -23,7 +29,10 @@ services:
     ports:
       - "4002:4002"
     env_file:
-      - ./progress-service/.env
+      - ./services/progress-service/.env
+    networks:
+      - app-net
+
 
   analytics-service:
     image: akb25/analytics-service:latest
@@ -31,7 +40,10 @@ services:
     ports:
       - "4003:4003"
     env_file:
-      - ./analytics-service/.env
+      - ./services/analytics-service/.env
+    networks:
+      - app-net
+
 
   nginx:
     image: nginx:latest
@@ -45,3 +57,8 @@ services:
       - course-service
       - progress-service
       - analytics-service
+    networks:
+      - app-net
+
+networks:
+  app-net:

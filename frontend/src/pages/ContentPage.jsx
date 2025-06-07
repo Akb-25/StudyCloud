@@ -1,6 +1,6 @@
-import axios from "axios";
 import CourseDetail from "../components/CourseDetail";
 import React, { useEffect, useState } from "react";
+import { axiosInstance } from "../lib/axios";
 // const course = {
 //     title: "AWS for Beginners",
 //     banner: "https://source.unsplash.com/800x400/?cloud",
@@ -31,7 +31,7 @@ const ContentPage = () => {
     useEffect(() => {
         const fetchModules = async () => {
             try{
-                const response = await axios.get(`http://localhost:4001/course/${courseId}`);
+                const response = await axiosInstance.get(`/course/${courseId}`);
                 setCourse(response.data);
                 console.log("Information that is received is: ", response.data);
             } catch (error) {
