@@ -1,17 +1,25 @@
 import jwt from 'jsonwebtoken';
 
-const authMiddleware = (req, res, next) => {
-    if (!token){
-        return res.status(401).json({ message: 'No token provided' });
-    }
+const authMiddleware = async (req, res, next) => {
     try{
+        const token = req.cookies.jwt;
+        
+        if (!token) {
+        return res.status(401).json({ message: "Unauthorized - No Token Provided" });
+        }
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
-    }
-    catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
+
+        if (!decoded) {
+        return res.status(401).json({ message: "Unauthorized - Invalid Token" });
+        }
+
+        req.user = user;
+        next(); 
+    } catch (error) {
+    console.log("Error in protectRoute middleware: ", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export default authMiddleware;
