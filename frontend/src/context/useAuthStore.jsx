@@ -11,6 +11,7 @@ const useAuthStore = create((set, get) => ({
     checkAuth: async () => {
         try{
             const res =  await axiosInstance.get("/auth/checking-auth");
+            console.log(res)
             set({ authUser: res.data});
         } catch{
             set({ authUser: null });
@@ -22,7 +23,7 @@ const useAuthStore = create((set, get) => ({
     set({ isSigningUp: true });
     try {
       const res = await axiosInstance.post("/auth/register", data);
-      set({ authUser: res.data });
+      set({ authUser: res.data.user });
       toast.success("Account created successfully");
     } catch (error) {
       toast.error(error.response.data.message);
@@ -35,7 +36,7 @@ const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
-      set({ authUser: res.data });
+      set({ authUser: res.data.user });
       toast.success("Logged in successfully");
 
     } catch (error) {
