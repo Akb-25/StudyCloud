@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-
+  
   if(isCheckingAuth && !authUser) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -29,6 +29,7 @@ function App() {
       </div>
     );
   };
+  console.log("Auth user: ", authUser)
   return (
     <div data-theme={theme}>
       {/* <div className="p-6">
@@ -37,13 +38,13 @@ function App() {
       </div> */}
       <Navbar />
       <Routes>
+        <Route path="/" element={authUser ? <HomePage/> : <Navigate to="/login" />} />
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/" element={authUser ? <HomePage/> : <Navigate to="/login" />} />
-        <Route path="/home" element={authUser ? <HomePage/> : <Navigate to="/login" />} />
         <Route path="/settings" element={<Settings/>} />
         <Route path="/course/:id" element={authUser ? <ContentPage/> : <Navigate to="/login" />} />
       </Routes>
+      <Toaster />
     </div>
   )
 }

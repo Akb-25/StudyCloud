@@ -22,7 +22,7 @@ const LoginPage = () => {
       return;
     }
     login(formData);
-    navigate("/home");
+    // navigate("/");
     toast.success("Logged in successfully");
   };
 

@@ -3,7 +3,7 @@ import { checkAuth,signup, login, logout } from '../controllers/auth.controller.
 
 const router = express.Router();
 
-router.post('/checking-auth', checkAuth)
+router.get('/checking-auth', checkAuth)
 router.post('/register',signup);
 router.post('/login', login);
 router.post('/logout', logout);

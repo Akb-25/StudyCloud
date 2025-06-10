@@ -8,7 +8,7 @@ const useAuthStore = create((set, get) => ({
     isLoggingIn: false,
     isCheckingAuth: true,
 
-    checkingAuth: async () => {
+    checkAuth: async () => {
         try{
             const res =  await axiosInstance.get("/auth/checking-auth");
             set({ authUser: res.data});
@@ -50,7 +50,6 @@ const useAuthStore = create((set, get) => ({
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
       toast.success("Logged out successfully");
-      get().disconnectSocket();
     } catch (error) {
       toast.error(error.response.data.message);
     }
