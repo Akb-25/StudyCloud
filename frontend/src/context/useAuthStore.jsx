@@ -11,7 +11,7 @@ const useAuthStore = create((set, get) => ({
     checkAuth: async () => {
         try{
             const res =  await axiosInstance.get("/auth/checking-auth");
-            console.log(res)
+            // console.log(res)
             set({ authUser: res.data});
         } catch{
             set({ authUser: null });
@@ -36,6 +36,7 @@ const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
+      console.log(res)
       set({ authUser: res.data.user });
       toast.success("Logged in successfully");
 

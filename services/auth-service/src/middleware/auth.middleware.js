@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const authMiddleware = async (req, res, next) => {
+const protectRoute = async (req, res, next) => {
     try{
         const token = req.cookies.jwt;
         
@@ -14,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
         return res.status(401).json({ message: "Unauthorized - Invalid Token" });
         }
 
-        req.user = user;
+        req.user = { id: decoded.userId };
         next(); 
     } catch (error) {
     console.log("Error in protectRoute middleware: ", error.message);
@@ -22,4 +22,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-export default authMiddleware;
+export default protectRoute;

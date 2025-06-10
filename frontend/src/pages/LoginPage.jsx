@@ -21,7 +21,12 @@ const LoginPage = () => {
       console.error("Email and password are required");
       return;
     }
-    login(formData);
+    try {
+      await login(formData);
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
     // navigate("/");
     toast.success("Logged in successfully");
   };
