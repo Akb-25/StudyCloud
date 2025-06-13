@@ -47,3 +47,12 @@ Screenshots
 
 ---
 
+![register](https://github.com/user-attachments/assets/876f6d31-d3bd-455e-9e53-8a0ed11b0dfe)
+![login](https://github.com/user-attachments/assets/92be442b-6e50-4046-a602-07c8ed38d9ff)
+![home](https://github.com/user-attachments/assets/0921ad05-ebfc-4226-8f7d-9b05e1b07e1f)
+![course](https://github.com/user-attachments/assets/9f1175ce-a3e5-4712-8578-e5b2ac8d2c84)
+![microservices](https://github.com/user-attachments/assets/5f8e6a2a-1de0-46ac-8341-a1db491718bb)
+
+
+
+
